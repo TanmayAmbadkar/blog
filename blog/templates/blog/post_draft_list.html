@@ -1,0 +1,21 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block content %}
+    {% for post in posts %}
+    <div class="post-entry-horzontal">
+      <a href="{% url 'post_detail' pk=post.pk %}">
+         <div class="image element-animate" data-animate-effect="fadeIn" style="background-image: url(/media/{{post.cover_img}});"></div>
+        <span class="text">
+          <div class="post-meta">
+            <span class="author mr-2"><img src="/media/{{post.author.profile_img}}" alt="Colorlib">  {{post.author.user.first_name}} {{post.author.user.last_name}}</span>&bullet;
+            <span class="mr-2">created: {{post.created_date}}</span> &bullet;
+            <span class="ml-2"><span class="fa fa-comments"></span> {{post.approve_comments.count}}</span>
+          </div>
+          <h2>{{ post.title }}</h2>
+        </span>
+      </a>
+    </div>
+    {% endfor %}
+
+{% endblock %}

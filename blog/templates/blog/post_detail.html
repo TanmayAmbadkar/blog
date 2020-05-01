@@ -1,0 +1,111 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="site-section py-lg">
+  <div class="container">
+
+    <div class="row blog-entries element-animate">
+
+      <div class="col-md-12 col-lg-8 main-content">
+        <img src="/media/{{post.cover_img}}" alt="Image" class="img-fluid mb-5">
+         <div class="post-meta">
+            <span class="author mr-2"> {{post.author.user.first_name}} {{post.author.user.last_name}}</span>&bullet;
+            {% if post.published_date  %}
+
+                <span class="mr-2">{{ post.published_date|date:"D M Y"}}</span> &bullet;
+
+                <span class="ml-2"><span class="fa fa-comments"></span> {{post.approve_comments.count}}</span>
+            {% else %}
+                <a href="{% url 'post_publish' pk=post.pk %}" class='btn btn-primary'>Publish</a>
+            {% endif %}
+          </div>
+        <h1 class="mb-4">{{post.title|safe|linebreaksbr}}</h1>
+
+        {% if user.is_authenticated %}
+            <a href="{% url 'post_edit' pk=post.pk %}" class="btn btn-primary">
+                Edit
+            </a>
+            <a href="{% url 'post_remove' pk=post.pk %}" class="btn btn-primary">
+                Delete
+            </a>
+        {% endif %}
+
+
+
+        <div class="post-content-body">
+            {{post.text|safe|linebreaksbr}}
+        </div>
+
+
+        <div class="pt-5">
+          <h3 class="mb-5">{{post.approve_comments.count}} Comments</h3>
+          <ul class="comment-list">
+
+              {% for comment in post.comments.all %}
+
+                {% if user.is_authenticated or comment.approved_comment %}
+                    <li class="comment">
+                      <div class="comment-body">
+                        <h3>{{comment.author}}</h3>
+                        <div class="meta">{{comment.created_date}}</div>
+                        <p>{{comment.text|safe|linebreaks}}</p>
+                      </div>
+                    </li>
+                    {% if not comment.approved_comment %}
+                        <a href="{% url 'comment_remove' pk=comment.pk %}">
+                            remove
+                        </a>
+                        <a href="{% url 'comment_approve' pk=comment.pk %}">
+                            approve
+                        </a>
+
+                    {% endif %}
+
+                {% endif %}
+
+                {% empty %}
+                <p> No Comments!</p>
+
+              {% endfor %}
+
+          </ul>
+          <!-- END comment-list -->
+
+        </div>
+
+        <a class="btn btn-primary btn-comment" href="{% url 'add_comments_to_post' pk=post.pk %}">Add Comment!</a>
+
+      </div>
+
+      <!-- END main-content -->
+
+      <div class="col-md-12 col-lg-4 sidebar">
+        <!-- END sidebar-box -->
+        <div class="sidebar-box">
+          <div class="bio text-center">
+            <img src="/media/{{post.author.profile_img}}" alt="Image Placeholder" class="img-fluid">
+            <div class="bio-body">
+              <h2>{{post.author.user.first_name}} {{post.author.user.last_name}}</h2>
+              <p>{{post.author.description}}</p>
+              <p class="social">
+                <a href="{{post.author.facebook}}" class="p-2"><span class="fa fa-facebook"></span></a>
+                <a href="{{post.author.github}}" class="p-2"><span class="fa fa-github"></span></a>
+                <a href="{{post.author.instagram}}" class="p-2"><span class="fa fa-instagram"></span></a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- END sidebar-box -->
+
+        <!-- END sidebar-box -->
+      </div>
+      <!-- END sidebar -->
+
+    </div>
+  </div>
+</section>
+
+
+{% endblock %}
