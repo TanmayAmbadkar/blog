@@ -3,10 +3,37 @@ from django.utils import timezone
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from blog.models import *
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.base import TemplateResponseMixin
 from django.contrib.auth.decorators import login_required
 from blog.forms import *
 from django.urls import reverse_lazy
+from django.contrib.auth import login, authenticate
 # Create your views here.
+
+
+class TanmayView(TemplateView):
+
+    template_name = 'tanmay.html'
+
+
+    def get_context_data(self, **kwargs):
+
+         context = super(TanmayView, self).get_context_data(**kwargs)
+         context['users'] = User.objects.filter(username__startswith = 'tanmay')
+         context['posts'] = Post.objects.filter(published_date__lte = timezone.now()).order_by('-published_date')[:3]
+         return context
+
+class AniketView(TemplateView):
+
+    template_name = 'tanmay.html'
+
+
+    def get_context_data(self, **kwargs):
+
+         context = super(AniketView, self).get_context_data(**kwargs)
+         context['users'] = User.objects.filter(username__startswith = 'aniket')
+         context['posts'] = Post.objects.filter(published_date__lte = timezone.now()).order_by('-published_date')[:3]
+         return context
 
 class HomeView(ListView):
 
@@ -18,17 +45,33 @@ class HomeView(ListView):
         return Post.objects.filter(published_date__lte = timezone.now()).order_by('-published_date')[:3]
 
 
+class PostListView_ML(TemplateView, TemplateResponseMixin):
 
-class PostListView(ListView):
+    template_name = 'post_list_ML.html'
+
+    def get_context_data(self, **kwargs):
+
+         context = super(PostListView_ML, self).get_context_data(**kwargs)
+         context['posts'] = Post.objects.filter(type__startswith = 'M')
+         context['topthree'] = Post.objects.filter(published_date__lte = timezone.now()).order_by('-published_date')[:3]
+         return context
+
+class PostListView_DL(ListView, TemplateResponseMixin):
 
     model = Post
+    template_name = 'post_list_DL.html'
 
-    def get_queryset(self):
-        return Post.objects.filter(published_date__lte = timezone.now()).order_by('-published_date')
+    def get_context_data(self, **kwargs):
+
+         context = super(PostListView_DL, self).get_context_data(**kwargs)
+         context['posts'] = Post.objects.filter(type__startswith = 'D')
+         context['topthree'] = Post.objects.filter(published_date__lte = timezone.now()).order_by('-published_date')[:3]
+         return context
 
 
 class PostDetailView(DetailView):
     model = Post
+
 
 class CreatePostView(LoginRequiredMixin, CreateView):
 
@@ -38,18 +81,31 @@ class CreatePostView(LoginRequiredMixin, CreateView):
     form_class = PostForm
     model = Post
 
-class PostUpdateView(LoginRequiredMixin, UpdateView):
+class PostUpdateView_ML(LoginRequiredMixin, UpdateView):
 
     template_name = 'post_form.html'
-    success_url = reverse_lazy('post_list')
+    success_url = reverse_lazy('post_list_ML')
     login_url = '/login/'
     form_class = PostForm
     model = Post
 
-class PostDeleteView(LoginRequiredMixin, DeleteView):
+class PostUpdateView_DL(LoginRequiredMixin, UpdateView):
+
+    template_name = 'post_form.html'
+    success_url = reverse_lazy('post_list_DL')
+    login_url = '/login/'
+    form_class = PostForm
+    model = Post
+
+class PostDeleteView_ML(LoginRequiredMixin, DeleteView):
 
     model = Post
-    success_url = reverse_lazy('post_list')
+    success_url = reverse_lazy('post_list_ML')
+
+class PostDeleteView_DL(LoginRequiredMixin, DeleteView):
+
+    model = Post
+    success_url = reverse_lazy('post_list_DL')
 
 
 class DraftListView(LoginRequiredMixin, ListView):
@@ -57,6 +113,7 @@ class DraftListView(LoginRequiredMixin, ListView):
     login_url = '/login/'
     redirect_field_name = 'blog/post_draft_list.html'
     model = Post
+    template_name = 'post_draft_list.html'
 
     def get_queryset(self):
 
@@ -103,3 +160,18 @@ def post_publish(request, pk):
     post = get_object_or_404(Post, pk = pk)
     post.publish()
     return redirect('post_detail', pk = post.pk)
+
+def signup_view(request):
+    form_class = UserForm
+    if request.method == 'POST':
+
+        form_class = UserForm(request.POST)
+
+        if form_class.is_valid():
+            form_class.save()
+            return redirect('home')
+
+    else:
+        form_class = UserForm()
+
+    return render(request, 'registration/signup.html', {'form': form_class})

@@ -23,6 +23,14 @@
 
                       </div>
                       <h3> {{post.title}}</h3>
+		       <p>Click to find out more!</p>
+			{% if post.type == 'M'  %}
+
+                   <span class="category mb-5">Machine Learning</span>
+               {% else %}
+
+                    <span class="category mb-5">Deep Learning</span>
+               {% endif %}
                     </div>
                   </a>
                 </div>
@@ -47,14 +55,17 @@
           <!-- END sidebar-box -->
           <div class="sidebar-box">
             <div class="bio text-center">
-              <img src="{% static "images/tanmay.jpg" %}" alt="Image Placeholder" class="img-fluid">
+             <a href="{% url 'tanmay' %}"><img src="{% static "images/tanmay.jpg" %}" alt="Image Placeholder" class="img-fluid"></a>
+
               <div class="bio-body">
                 <h2>Tanmay Ambadkar</h2>
-                <p>I love math and code, and Machine Learning seemed like the best blend of both, so here I am. I still have a lot to learn, but I like writing down and sharing with everyone.</p>
-                <p class="social">
+                <p>I love math and code, Machine Learning seemed like the best blend of both; so here I am. I still have a lot to learn, but I like writing down and sharing with everyone.</p>
+                <p><a href="{% url 'tanmay' %}" class="btn btn-primary btn-sm rounded">Read my bio</a></p>
+		<p class="social">
                   <a href="https://www.facebook.com/tambadkar3" target="_blank" class="p-2"><span class="fa fa-facebook"></span></a>
                   <a href="https://www.instagram.com/tanmay_ambadkar/" target="_blank" class="p-2"><span class="fa fa-instagram"></span></a>
-                </p>
+               	  <a href ="https://www.linkedin.com/in/tanmay-ambadkar" target="_blank" class="p-2"><span class='fa fa-linkedin'></span></a>
+		</p>
               </div>
             </div>
           </div>
@@ -63,14 +74,17 @@
 
           <div class="sidebar-box">
             <div class="bio text-center">
-              <img src="{% static "images/aniket.jpg" %}" alt="Image Placeholder" class="img-fluid">
+             <a href="{% url 'aniket' %}"><img src="{% static "images/aniket.jpg" %}" alt="Image Placeholder" class="img-fluid"></a>
+
               <div class="bio-body">
                 <h2>Aniket Dixit</h2>
-                <p>I do Computer stuff and maybe making world a better place by teaching machines how to be more of us. I learn the machine way of learning to teach machine the human ways of doing stuff</p>
+                <p>I do Computers and maybe making world a better place by teaching machines how to be more of us. I try to learn the machine way of learning to teach machine the human ways of doing stuff</p>
+                <p><a href="{% url 'aniket' %}" class="btn btn-primary btn-sm rounded">Read my bio</a></p>
                 <p class="social">
                   <a href="https://www.facebook.com/aniket.dixit.5494" class="p-2" target="_blank"><span class="fa fa-facebook" ></span></a>
                   <a href="https://www.instagram.com/aniket.dixit.5494/" class="p-2" target="_blank"><span class="fa fa-instagram"target="_blank"></span></a>
-                </p>
+                  <a href="https://www.linkedin.com/in/dixitaniket199" class ="p-2" target="_blank"><span class ="fa fa-linkedin" target="_blank"></span></a>
+		</p>
               </div>
             </div>
           </div>
@@ -82,3 +96,26 @@
 
 
 {% endblock%}
+
+
+{% block footerblock %}
+    {% for post in post_list %}
+
+    <ul>
+      <li>
+        <a href="{% url 'post_detail' pk=post.pk %}">
+          <img src="/media/{{post.cover_img}}" alt="Image placeholder" class="mr-4">
+          <div class="text">
+            <h4>{{post.title}}</h4>
+            <div class="post-meta">
+              <span class="mr-2">{{ post.published_date|date:"D M Y"}} </span> &bullet;
+              <span class="ml-2"><span class="fa fa-comments"></span>{{post.approve_comments.count}}</span>
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
+
+    {% endfor %}
+
+{% endblock  %}

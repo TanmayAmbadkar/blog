@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-import django_heroku
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'blog/templates/blog')
@@ -23,10 +23,9 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'blog/templates/blog')
 SECRET_KEY = 'byke!01r6scr^js+ybv8iyf+qklbt53!(p3(f4ms!c$r#_e%=w'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS=['makingcomputerssmart.ml','www.makingcomputerssmart.ml', '127.0.0.1', 'localhost',]
 
 # Application definition
 
@@ -39,7 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'django_summernote',
-]
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'django.contrib.sites',
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -50,7 +54,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
 ]
 
 ROOT_URLCONF = 'myblog.urls'
@@ -78,20 +81,12 @@ WSGI_APPLICATION = 'myblog.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-
+        
     'default': {
 
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.sqlite3',
 
-        'NAME': 'd57ovj9te6oih2',
-
-        'USER': 'uvsfcgfcuufhyu',
-
-        'PASSWORD': '3e6a61cff8b8f068035b8f57daa01678a988a1d7752916535574f8e977b62aa4',
-
-        'HOST': 'ec2-54-88-130-244.compute-1.amazonaws.com',
-
-        'PORT': '5432',
+        'NAME': os.path.join(BASE_DIR,'db.sqlite3'),
 
     }
 
@@ -136,18 +131,37 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')
+STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static'),
 
+        ]
+
+ENV_PATH=os.path.abspath(os.path.dirname(__file__))
+MEDIA_URL='/media/'
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIALFILES_DIR=[
+        os.path.join(BASE_DIR,'media'),
+        ]
 
+SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
-django_heroku.settings(locals())
 
+AUTHENTICATION_BACKENDS = (
+ 'django.contrib.auth.backends.ModelBackend',
+ 'allauth.account.auth_backends.AuthenticationBackend',
+ )
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}

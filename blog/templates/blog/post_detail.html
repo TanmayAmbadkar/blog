@@ -3,15 +3,25 @@
 
 {% block content %}
 
+{% if post.published_date or request.user.is_superuser %}
 <section class="site-section py-lg">
   <div class="container">
 
     <div class="row blog-entries element-animate">
 
       <div class="col-md-12 col-lg-8 main-content">
+       <h1 class="mb-4">{{post.title|safe|linebreaksbr}}</h1>
+	{% if post.type == 'M' %}
+         <a class="category mb-5" href="{% url 'post_list_ML' %}">Machine Learning</a>
+      {% else %}
+
+        <a class="category mb-5" href="{% url 'post_list_DL' %}">Deep Learning</a>
+      {% endif %}
+
         <img src="/media/{{post.cover_img}}" alt="Image" class="img-fluid mb-5">
          <div class="post-meta">
             <span class="author mr-2"> {{post.author.user.first_name}} {{post.author.user.last_name}}</span>&bullet;
+
             {% if post.published_date  %}
 
                 <span class="mr-2">{{ post.published_date|date:"D M Y"}}</span> &bullet;
@@ -21,15 +31,24 @@
                 <a href="{% url 'post_publish' pk=post.pk %}" class='btn btn-primary'>Publish</a>
             {% endif %}
           </div>
-        <h1 class="mb-4">{{post.title|safe|linebreaksbr}}</h1>
-
-        {% if user.is_authenticated %}
-            <a href="{% url 'post_edit' pk=post.pk %}" class="btn btn-primary">
+        {% if user.is_superuser %}
+            {% if post.type == 'M' %}
+            <a href="{% url 'post_edit_ml' pk=post.pk %}" class="btn btn-primary">
                 Edit
             </a>
-            <a href="{% url 'post_remove' pk=post.pk %}" class="btn btn-primary">
+            <a href="{% url 'post_remove_ml' pk=post.pk %}" class="btn btn-primary">
                 Delete
             </a>
+            {% else %}
+            <a href="{% url 'post_edit_dl' pk=post.pk %}" class="btn btn-primary">
+                Edit
+            </a>
+            <a href="{% url 'post_remove_dl' pk=post.pk %}" class="btn btn-primary">
+                Delete
+            </a>
+
+            {% endif %}
+
         {% endif %}
 
 
@@ -45,8 +64,17 @@
 
               {% for comment in post.comments.all %}
 
-                {% if user.is_authenticated or comment.approved_comment %}
+                {% if user.is_superuser or comment.approved_comment %}
                     <li class="comment">
+                {% if comment.profile_img %}
+                    <div class="vcard">
+                        <img src="/media/{{comment.profile_img}}" alt="Image placeholder">
+                    </div>
+                    {% else %}
+                    <div class="vcard">
+                        <img src="{% static "images/img_7.jpg" %}" alt="Image placeholder">
+                    </div>
+                    {% endif %}
                       <div class="comment-body">
                         <h3>{{comment.author}}</h3>
                         <div class="meta">{{comment.created_date}}</div>
@@ -76,6 +104,7 @@
         </div>
 
         <a class="btn btn-primary btn-comment" href="{% url 'add_comments_to_post' pk=post.pk %}">Add Comment!</a>
+	<p>New comments might not be seen until the author approves them.</p>
 
       </div>
 
@@ -89,6 +118,11 @@
             <div class="bio-body">
               <h2>{{post.author.user.first_name}} {{post.author.user.last_name}}</h2>
               <p>{{post.author.description}}</p>
+	      {% if post.author.user.username == 'tanmay'  %}
+                <p><a href="{% url 'tanmay' %}" class="btn btn-primary btn-sm rounded">Read my bio</a></p>
+              {% else %}
+                <p><a href="{% url 'aniket' %}" class="btn btn-primary btn-sm rounded">Read my bio</a></p>
+              {% endif %}
               <p class="social">
                 <a href="{{post.author.facebook}}" class="p-2"><span class="fa fa-facebook"></span></a>
                 <a href="{{post.author.github}}" class="p-2"><span class="fa fa-github"></span></a>
@@ -107,5 +141,6 @@
   </div>
 </section>
 
+{% endif %}
 
 {% endblock %}

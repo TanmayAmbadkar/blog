@@ -10,13 +10,16 @@ class UserProfileInfo(models.Model):
     user = models.OneToOneField(User, on_delete= models.CASCADE)
 
     profile_img = models.ImageField(upload_to = 'profile_pics', blank = True)
+    cover_image = models.ImageField(upload_to = 'cover_profile_img', blank = True)
 
     description = models.TextField(blank = True)
+    writeup = models.TextField(blank = True)
 
     instagram = models.URLField(blank = True)
     facebook = models.URLField(blank = True)
     github = models.URLField(blank = True)
-
+    linkedin = models.URLField(blank = True)
+    email = models.EmailField(blank = True)
     def __str__(self):
 
         return self.user.username
@@ -24,12 +27,17 @@ class UserProfileInfo(models.Model):
 
 class Post(models.Model):
 
+    types = (
+        ('D', 'Deep Learning'),
+        ('M', 'Machine Learning'),
+    )
     author = models.ForeignKey('UserProfileInfo', on_delete = models.CASCADE)
     title = models.CharField(max_length = 200)
     cover_img = models.ImageField(upload_to = 'cover_image', blank = True)
     text = models.TextField()
     created_date = models.DateTimeField(default = timezone.now)
     published_date = models.DateTimeField(blank = True, null = True)
+    type = models.CharField(max_length = 1, choices = types, blank = True)
 
 
     def publish(self):
@@ -45,10 +53,12 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+
 class Comment(models.Model):
 
     post = models.ForeignKey('blog.Post', related_name = 'comments', on_delete = models.CASCADE)
     author = models.CharField(max_length = 100)
+    profile_img = models.ImageField(upload_to = 'profile_pics', blank = True)
     text= models.TextField()
     create_date = models.DateTimeField(default = timezone.now)
     approved_comment = models.BooleanField(default = False)
@@ -58,10 +68,10 @@ class Comment(models.Model):
         self.save()
 
     def get_absolute_url(self):
-            return reverse('post_list')
-
-    def get_absolute_url(self):
-        return reverse('post_list')
+        if(self.post.type == 'M'):
+            return reverse('post_list_ML')
+        else:
+            return reverse('post_list_DL')
 
     def __str__(self):
         return self.text

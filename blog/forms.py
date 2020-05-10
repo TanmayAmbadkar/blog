@@ -12,18 +12,18 @@ class UserForm(forms.ModelForm):
         fields = ('first_name', 'last_name', 'username', 'email', 'password')
 
 
-class UserProfileInfo(forms.ModelForm):
+class UserProfileInfoForm(forms.ModelForm):
     class Meta():
 
         model = UserProfileInfo
-        fields = ('profile_img','description', 'instagram', 'facebook', 'github')
+        fields = ('profile_img',)
 
 
 class PostForm(forms.ModelForm):
 
     class Meta():
         model = Post
-        fields = ('author','cover_img', 'title', 'text')
+        fields = ('author','cover_img', 'title', 'text', 'type')
 
         widgets = {
             'title' : forms.TextInput(attrs = {'class' : 'textinputclass'}),
@@ -34,7 +34,7 @@ class CommentForm(forms.ModelForm):
 
     class Meta():
         model = Comment
-        fields = ('author', 'text')
+        fields = ('author', 'text', 'profile_img')
 
         widgets = {
             'author' : forms.TextInput(attrs = {'class' : 'textinputclass'}),

@@ -1,7 +1,19 @@
+{% load static %}
+{% load socialaccount %}
 <!DOCTYPE html>
-{%  load static %}
+
 <html lang="en" dir="ltr">
     <head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-165442886-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-165442886-1');
+</script>
+
         <meta charset="utf-8">
         <title>Making Computers Smart</title>
 
@@ -48,12 +60,15 @@
             <div class="top-bar">
               <div class="container">
                 <div class="row">
-                  <div class="col-8 social">
+                  <div class="col-10 social">
                       <a href="https://www.facebook.com/makingcomputerssmart/" target="_blank"><span class="fa fa-facebook"></span></a>
                       <a href="http://instagram.com/making_computers_smart" target="_blank"><span class="fa fa-instagram"></span></a>
+
+
                   </div>
-                  <div class="col-4 search-top">
+                  <div class="col-2 social">
                     <!-- <a href="#"><span class="fa fa-search"></span></a> -->
+			 <a class="absolute-toggle d-block d-md-none" data-toggle="collapse" href="#navbarMenu" role="button" aria-expanded="false" aria-controls="navbarMenu"><span class="fa fa-navicon"></span></a>
 
 
                   </div>
@@ -64,8 +79,9 @@
             <div class="container logo-wrap">
               <div class="row pt-5">
                 <div class="col-12 text-center">
-                  <a class="absolute-toggle d-block d-md-none" data-toggle="collapse" href="#navbarMenu" role="button" aria-expanded="false" aria-controls="navbarMenu"><span class="burger-lines"></span></a>
-                  <h1 class="site-logo"><a href="{% url 'home' %}">Making Computers </sbr> Smart</a></h1>
+
+		</br>
+                  <h1 class="site-logo"><a href="{% url 'home' %}">Making Computers Smart</a></h1>
                 </div>
               </div>
             </div>
@@ -73,16 +89,27 @@
             <nav class="navbar navbar-expand-md  navbar-light bg-light">
               <div class="container">
 
-
                 <div class="collapse navbar-collapse" id="navbarMenu">
                   <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                      <a class="nav-link active" href="{% url 'home' %}">Home</a>
+                      <a class="nav-link" href="{% url 'home' %}">Home</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="{% url 'post_list' %}">Machine Learning</a>
+                      <a class="nav-link" href="{% url 'post_list_ML' %}">Machine Learning</a>
                     </li>
-                    {% if user.is_authenticated %}
+
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'post_list_DL' %}">Deep Learning</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="category.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About Us</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown04">
+                            <a class="dropdown-item" href="{% url 'aniket' %}">Aniket</a>
+                            <a class="dropdown-item" href="{% url 'tanmay' %}">Tanmay</a>
+                        </div>
+
+                    </li>
+                    {% if user.is_superuser %}
                     <li>
                         <a href="{% url 'post_new' %}" class = 'nav-link'>New</a>
                     </li>
@@ -92,15 +119,17 @@
                     <li>
                         <a href="{% url 'logout' %}" class = 'nav-link'>Logout</a>
                     </li>
+                    {% elif user.is_authenticated %}
+                        <li class="nav-item">
+                          <a class="nav-link disabled" href="#">Welcome {{user.first_name}} {{user.last_name}}</a>
+                        </li>
+			<li>                                                                                                                        <a href="{% url 'logout' %}" class = 'nav-link'>Logout</a>                                                          </li> 
                     {% else %}
-
                         </li>
                             <a href="{% url 'login' %}" class = 'nav-link'>
                                 Login
                             </a>
                         </li>
-
-
                     {% endif %}
 
                   </ul>
@@ -126,48 +155,16 @@
                 <img src="{% static 'images/mainimage.jpg' %}" alt="Image placeholder" class="img-fluid">
               </p>
 
-              <p>Sometimes we teach computers how to be more of us</p>
+              <p>We teach computers how to be more like us</p>
             </div>
             <div class="col-md-6 ml-auto">
               <div class="row">
                 <div class="col-md-7">
                   <h3>Latest Post</h3>
                   <div class="post-entry-sidebar">
-                    {% comment %} <ul>
-                      <li>
-                        <a href="">
-                          <img src="images/neuralnet2.jpg" alt="Image placeholder" class="mr-4">
-                          <div class="text">
-                            <h4>Supervised V/s Unsupervised Learning</h4>
-                            <div class="post-meta">
-                              <span class="mr-2">April 28, 2020 </span> &bullet;
-                            </div>
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="">
-                          <img src="images/neuralnet1.jpg" alt="Image placeholder" class="mr-4">
-                          <div class="text">
-                            <h4>The Decision Tree Algorithm</h4>
-                            <div class="post-meta">
-                              <span class="mr-2">April 28, 2020 </span> &bullet;
-                            </div>
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="">
-                          <img src="images/big_image_3.jpg" alt="Image placeholder" class="mr-4">
-                          <div class="text">
-                            <h4>The Random Forest Algorithm</h4>
-                            <div class="post-meta">
-                              <span class="mr-2">April 28, 2020 </span> &bullet;
-                            </div>
-                          </div>
-                        </a>
-                      </li>
-                    </ul> {% endcomment %}
+                    {% block footerblock %}
+                    {% endblock %}
+
                   </div>
                 </div>
                 <div class="col-md-1"></div>
@@ -177,10 +174,16 @@
                   <div class="mb-5">
                     <h3>Quick Links</h3>
                     <ul class="list-unstyled">
-                      <li><a href="#">Home</a></li>
-                      <li><a href="#">Machine Learning</a></li>
-                      <li><a href="#">About</a></li>
-                      <li><a href="#">Contact us</a></li>
+                      <li><a href="{% url 'home' %}">Home</a></li>
+                      <li><a href="{% url 'post_list_ML' %}">Machine Learning</a></li>
+                      <li><a href="{% url 'post_list_DL' %}">Deep Learning</a></li>
+                      <li> About
+                          <ul class="list-inline">
+                              <li><a href="{% url 'aniket' %}">Aniket</a></li>
+                              <li><a href="{% url 'tanmay' %}">Tanmay</a></li>
+
+                          </ul>
+                      </li>
                     </ul>
                   </div>
 
