@@ -1,0 +1,227 @@
+{% load static %}
+{% load socialaccount %}
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+    <head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-165442886-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-165442886-1');
+</script>
+
+        <meta charset="utf-8">
+        <title>Making Computers Smart</title>
+
+        <!-- Wordify -->
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+
+        <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300, 400,700|Inconsolata:400,700" rel="stylesheet">
+
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+        <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+
+        <link rel="stylesheet" href="{% static 'fonts/ionicons/css/ionicons.min.css' %}">
+        <link rel="stylesheet" href="{% static 'fonts/fontawesome/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'fonts/flaticon/font/flaticon.css' %}">
+
+        <!-- Theme Style -->
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+        <!-- Bootstrap -->
+
+
+        <!-- Medium style editor -->
+
+        <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+
+
+        <!-- Fonts -->
+
+    </head>
+    <body>
+
+        <!-- Navbar -->
+        <div class="wrap">
+
+            <header role="banner">
+            <div class="top-bar">
+              <div class="container">
+                <div class="row">
+                  <div class="col-10 social">
+                      <a href="https://www.facebook.com/makingcomputerssmart/" target="_blank" rel="noreferrer"><span class="fa fa-facebook"></span></a>
+                      <a href="http://instagram.com/making_computers_smart" target="_blank" rel="noreferrer"><span class="fa fa-instagram"></span></a>
+
+
+                  </div>
+                  <div class="col-2 social">
+                    <!-- <a href="#"><span class="fa fa-search"></span></a> -->
+			 <a class="absolute-toggle d-block d-md-none" data-toggle="collapse" href="#navbarMenu" role="button" aria-expanded="false" aria-controls="navbarMenu"><span class="fa fa-navicon"></span></a>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="container logo-wrap">
+              <div class="row pt-5">
+                <div class="col-12 text-center">
+
+		</br>
+                  <h1 class="site-logo"><a href="{% url 'home' %}" rel="noreferrer">Making Computers Smart</a></h1>
+                </div>
+              </div>
+            </div>
+
+            <nav class="navbar navbar-expand-md  navbar-light bg-light">
+              <div class="container">
+
+                <div class="collapse navbar-collapse" id="navbarMenu">
+                  <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'home' %}" rel="noreferrer">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'post_list_ML' %}" rel="noreferrer">Machine Learning</a>
+                    </li>
+
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'post_list_DL' %}" rel="noreferrer">Deep Learning</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="category.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About Us</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown04">
+                            <a class="dropdown-item" href="{% url 'aniket' %}" rel="noreferrer">Aniket</a>
+                            <a class="dropdown-item" href="{% url 'tanmay' %}" rel="noreferrer>Tanmay</a>
+                        </div>
+
+                    </li>
+                    {% if user.is_superuser %}
+                    <li>
+                        <a href="{% url 'post_new' %}" class = 'nav-link'  rel="noreferrer>New</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'post_draft_list' %}" class = 'nav-link' rel="noreferrer>Drafts</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'logout' %}" class = 'nav-link' rel="noreferrer>Logout</a>
+                    </li>
+                    {% elif user.is_authenticated %}
+                        <li class="nav-item">
+                          <a class="nav-link disabled" href="#"  rel="noreferrer>Welcome {{user.first_name}} {{user.last_name}}</a>
+                        </li>
+			<li>                                                                                                                        <a href="{% url 'logout' %}" class = 'nav-link'>Logout</a>                                                          </li> 
+                    {% else %}
+                        </li>
+                            <a href="{% url 'login' %}" class = 'nav-link' rel="noreferrer>
+                                Login
+                            </a>
+                        </li>
+                    {% endif %}
+
+                  </ul>
+
+                </div>
+              </div>
+            </nav>
+          </header>
+
+          <!-- Content block -->
+
+              {% block content %}
+              {% endblock  %}
+
+
+         </div>
+         <footer class="site-footer">
+        <div class="container">
+          <div class="row mb-5">
+            <div class="col-md-4">
+              <h3>About Us</h3>
+              <p class="mb-4">
+                <img src="{% static 'images/mainimage.jpg' %}" alt="Image placeholder" class="img-fluid">
+              </p>
+
+              <p>We teach computers how to be more like us</p>
+            </div>
+            <div class="col-md-6 ml-auto">
+              <div class="row">
+                <div class="col-md-7">
+                  <h3>Latest Post</h3>
+                  <div class="post-entry-sidebar">
+                    {% block footerblock %}
+                    {% endblock %}
+
+                  </div>
+                </div>
+                <div class="col-md-1"></div>
+
+                <div class="col-md-4">
+
+                  <div class="mb-5">
+                    <h3>Quick Links</h3>
+                    <ul class="list-unstyled">
+                      <li><a href="{% url 'home' %}" rel="noreferrer>Home</a></li>
+                      <li><a href="{% url 'post_list_ML' %}" rel="noreferrer">Machine Learning</a></li>
+                      <li><a href="{% url 'post_list_DL' %}"rel="noreferrer">Deep Learning</a></li>
+                      <li> About
+                          <ul class="list-inline">
+                              <li><a href="{% url 'aniket' %}" rel="noreferrer>Aniket</a></li>
+                              <li><a href="{% url 'tanmay' %}" rel="noreferrer>Tanmay</a></li>
+
+                          </ul>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="mb-5">
+                    <h3>Social</h3>
+                    <ul class="list-unstyled footer-social">
+                      <li><a href="https://www.facebook.com/makingcomputerssmart/" target="_blank"><span class="fa fa-facebook"></span> Facebook</a></li>
+                      <li><a href="http://instagram.com/making_computers_smart" target="_blank"><span class="fa fa-instagram"></span> Instagram</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <p class="small">
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All Rights Reserved | This template is made with <i class="fa fa-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </p>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      <!-- loader -->
+
+
+        <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+        <script src="{% static 'js/jquery-migrate-3.0.0.js' %}"></script>
+        <script src="{% static 'js/popper.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+        <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+        <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+
+
+        <script src="{% static 'js/main.js' %}"></script>
+    </body>
+</html>

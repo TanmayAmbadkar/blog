@@ -35,14 +35,17 @@ class AniketView(TemplateView):
          context['posts'] = Post.objects.filter(published_date__lte = timezone.now()).order_by('-published_date')[:3]
          return context
 
-class HomeView(ListView):
+class HomeView(TemplateView):
 
-    model = Post
 
     template_name = 'home.html'
 
-    def get_queryset(self):
-        return Post.objects.filter(published_date__lte = timezone.now()).order_by('-published_date')[:3]
+    def get_context_data(self, **kwargs):
+
+        context = super(HomeView, self).get_context_data(**kwargs)
+        context['users'] = UserProfileInfo.objects.all()
+        context['posts'] = Post.objects.filter(published_date__lte = timezone.now()).order_by('-published_date')[:3]
+        return context
 
 
 class PostListView_ML(TemplateView, TemplateResponseMixin):
@@ -52,7 +55,7 @@ class PostListView_ML(TemplateView, TemplateResponseMixin):
     def get_context_data(self, **kwargs):
 
          context = super(PostListView_ML, self).get_context_data(**kwargs)
-         context['posts'] = Post.objects.filter(type__startswith = 'M')
+         context['posts'] = Post.objects.filter(type__startswith = 'M').order_by('-published_date')
          context['topthree'] = Post.objects.filter(published_date__lte = timezone.now()).order_by('-published_date')[:3]
          return context
 
@@ -64,7 +67,7 @@ class PostListView_DL(ListView, TemplateResponseMixin):
     def get_context_data(self, **kwargs):
 
          context = super(PostListView_DL, self).get_context_data(**kwargs)
-         context['posts'] = Post.objects.filter(type__startswith = 'D')
+         context['posts'] = Post.objects.filter(type__startswith = 'D').order_by('-published_date')
          context['topthree'] = Post.objects.filter(published_date__lte = timezone.now()).order_by('-published_date')[:3]
          return context
 

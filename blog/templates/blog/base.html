@@ -5,26 +5,23 @@
 <html lang="en" dir="ltr">
     <head>
 	<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-165442886-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+	
+	<script data-ad-client="ca-pub-9016548972404551" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
-  gtag('config', 'UA-165442886-1');
-</script>
 
         <meta charset="utf-8">
         <title>Making Computers Smart</title>
 
         <!-- Wordify -->
+	<meta name="description" content="This blog is about machine learning and deep learning, by Tanmay and Aniket"/>
 
-        <meta charset="utf-8">
+
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
 
         <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300, 400,700|Inconsolata:400,700" rel="stylesheet">
 
         <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+
         <link rel="stylesheet" href="{% static 'css/animate.css' %}">
         <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
 
@@ -34,18 +31,7 @@
 
         <!-- Theme Style -->
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
-        <!-- Bootstrap -->
-
-
-        <!-- Medium style editor -->
-
-        <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
-        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
-
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
-
 
 
         <!-- Fonts -->
@@ -61,8 +47,8 @@
               <div class="container">
                 <div class="row">
                   <div class="col-10 social">
-                      <a href="https://www.facebook.com/makingcomputerssmart/" target="_blank"><span class="fa fa-facebook"></span></a>
-                      <a href="http://instagram.com/making_computers_smart" target="_blank"><span class="fa fa-instagram"></span></a>
+                      <a href="https://www.facebook.com/makingcomputerssmart/" target="_blank" rel="noreferrer"><span class="fa fa-facebook"></span></a>
+                      <a href="http://instagram.com/making_computers_smart" target="_blank" rel="noreferrer"><span class="fa fa-instagram"></span></a>
 
 
                   </div>
@@ -81,7 +67,7 @@
                 <div class="col-12 text-center">
 
 		</br>
-                  <h1 class="site-logo"><a href="{% url 'home' %}">Making Computers Smart</a></h1>
+                  <h1 class="site-logo"><a href="{% url 'home' %}" rel="noreferrer">Making Computers Smart</a></h1>
                 </div>
               </div>
             </div>
@@ -92,14 +78,14 @@
                 <div class="collapse navbar-collapse" id="navbarMenu">
                   <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                      <a class="nav-link" href="{% url 'home' %}">Home</a>
+                      <a class="nav-link" href="{% url 'home' %}" rel="noreferrer">Home</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="{% url 'post_list_ML' %}">Machine Learning</a>
+                      <a class="nav-link" href="{% url 'post_list_ML' %}" rel="noreferrer">Machine Learning</a>
                     </li>
 
                     <li class="nav-item">
-                      <a class="nav-link" href="{% url 'post_list_DL' %}">Deep Learning</a>
+                      <a class="nav-link" href="{% url 'post_list_DL' %}" rel="noreferrer">Deep Learning</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="category.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About Us</a>
@@ -126,7 +112,7 @@
 			<li>                                                                                                                        <a href="{% url 'logout' %}" class = 'nav-link'>Logout</a>                                                          </li> 
                     {% else %}
                         </li>
-                            <a href="{% url 'login' %}" class = 'nav-link'>
+                            <a href="{% url 'login' %}" class = 'nav-link' rel="noreferrer">
                                 Login
                             </a>
                         </li>
@@ -174,13 +160,13 @@
                   <div class="mb-5">
                     <h3>Quick Links</h3>
                     <ul class="list-unstyled">
-                      <li><a href="{% url 'home' %}">Home</a></li>
-                      <li><a href="{% url 'post_list_ML' %}">Machine Learning</a></li>
-                      <li><a href="{% url 'post_list_DL' %}">Deep Learning</a></li>
+                      <li><a href="{% url 'home' %}" rel="noreferrer">Home</a></li>
+                      <li><a href="{% url 'post_list_ML' %} rel="noreferrer"">Machine Learning</a></li>
+                      <li><a href="{% url 'post_list_DL' %} rel="noreferrer"">Deep Learning</a></li>
                       <li> About
                           <ul class="list-inline">
-                              <li><a href="{% url 'aniket' %}">Aniket</a></li>
-                              <li><a href="{% url 'tanmay' %}">Tanmay</a></li>
+                              <li><a href="{% url 'aniket' %}" rel="noreferrer">Aniket</a></li>
+                              <li><a href="{% url 'tanmay' %}" rel="noreferrer">Tanmay</a></li>
 
                           </ul>
                       </li>
@@ -190,8 +176,8 @@
                   <div class="mb-5">
                     <h3>Social</h3>
                     <ul class="list-unstyled footer-social">
-                      <li><a href="https://www.facebook.com/makingcomputerssmart/" target="_blank"><span class="fa fa-facebook"></span> Facebook</a></li>
-                      <li><a href="http://instagram.com/making_computers_smart" target="_blank"><span class="fa fa-instagram"></span> Instagram</a></li>
+                      <li><a href="https://www.facebook.com/makingcomputerssmart/" target="_blank" rel="noreferrer"><span class="fa fa-facebook"></span> Facebook</a></li>
+                      <li><a href="http://instagram.com/making_computers_smart" target="_blank" rel="noreferrer"><span class="fa fa-instagram"></span> Instagram</a></li>
                     </ul>
                   </div>
                 </div>
@@ -202,7 +188,7 @@
             <div class="col-md-12 text-center">
               <p class="small">
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All Rights Reserved | This template is made with <i class="fa fa-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+            Copyright &copy;2020 All Rights Reserved | This template is made with <i class="fa fa-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" rel="noreferrer" >Colorlib</a>
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
             </p>
             </div>
@@ -213,14 +199,25 @@
       <!-- loader -->
 
 
-        <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+        <!-- script src="https://code.jquery.com/jquery-3.5.1.min.js"></script -->
+	<script  src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
         <script src="{% static 'js/jquery-migrate-3.0.0.js' %}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.0/jquery-migrate.min.js"></script>
         <script src="{% static 'js/popper.min.js' %}"></script>
-        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- script src="{% static 'js/bootstrap.min.js' %}"></script -->
         <script src="{% static 'js/owl.carousel.min.js' %}"></script>
         <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
         <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
-
+	
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-165442886-1"></script>
+	<script>
+	 window.dataLayer = window.dataLayer || []; 
+	 function gtag(){dataLayer.push(arguments);} 
+	 gtag('js', new Date()); 
+	 gtag('config', 'UA-165442886-1');
+	</script>  
 
         <script src="{% static 'js/main.js' %}"></script>
     </body>
