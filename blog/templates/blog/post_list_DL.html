@@ -16,6 +16,7 @@
           <div class="col-md-12">
 
               {% for post in posts %}
+	      {% if post.published_date %}
               <div class="post-entry-horzontal">
                 <a href="{% url 'post_detail' pk=post.pk %}">
                   <div class="image element-animate" data-animate-effect="fadeIn"  style="background-image: url(/media/{{post.cover_img}});"></div>
@@ -29,6 +30,7 @@
                   </span>
                 </a>
               </div>
+	      {% endif %}
               {% endfor %}
 
           </div>

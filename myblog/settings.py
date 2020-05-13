@@ -25,7 +25,7 @@ SECRET_KEY = 'byke!01r6scr^js+ybv8iyf+qklbt53!(p3(f4ms!c$r#_e%=w'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS=['makingcomputerssmart.com','www.makingcomputerssmart.com','35.154.241.176', 'localhost']
+ALLOWED_HOSTS=['makingcomputerssmart.com','www.makingcomputerssmart.com','15.206.163.33', 'localhost']
 
 # Application definition
 
@@ -167,4 +167,4 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 
-SENDGRID_API_KEY='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'
+SENDGRID_API_KEY='SG.hb8PP6R1S0CbD_ocQDRHMA.OtoAoK7T-hR0eK49S7m7Hj5dwjFOw6ik57yPp_sUDk'
