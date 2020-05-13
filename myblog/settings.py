@@ -23,9 +23,9 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'blog/templates/blog')
 SECRET_KEY = 'byke!01r6scr^js+ybv8iyf+qklbt53!(p3(f4ms!c$r#_e%=w'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS=['makingcomputerssmart.com','www.makingcomputerssmart.com','35.154.241.176']
+ALLOWED_HOSTS=['makingcomputerssmart.com','www.makingcomputerssmart.com','35.154.241.176', 'localhost']
 
 # Application definition
 
