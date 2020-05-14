@@ -75,6 +75,14 @@ class PostListView_DL(ListView, TemplateResponseMixin):
 class PostDetailView(DetailView):
     model = Post
 
+    def get_context_data(self, **kwargs):
+
+         context = super(PostDetailView, self).get_context_data(**kwargs)
+         context['post'] = Post.objects.get(pk = self.kwargs['pk'])
+         context['topthree'] = Post.objects.filter(published_date__lte = timezone.now()).order_by('-published_date')[:3]
+         return context
+
+
 
 class CreatePostView(LoginRequiredMixin, CreateView):
 

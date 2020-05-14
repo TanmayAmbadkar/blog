@@ -144,3 +144,25 @@
 {% endif %}
 
 {% endblock %}
+
+{% block footerblock %}
+    {% for pos in topthree %}
+
+    <ul>
+      <li>
+        <a href="{% url 'post_detail' pk=pos.pk %}">
+          <img src="/media/{{pos.cover_img}}" alt="Image placeholder" class="mr-4">
+          <div class="text">
+            <h4>{{pos.title}}</h4>
+            <div class="post-meta">
+              <span class="mr-2">{{ pos.published_date|date:"D M Y"}} </span> &bullet;
+              <span class="ml-2"><span class="fa fa-comments"></span>{{pos.approve_comments.count}}</span>
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
+
+    {% endfor %}
+
+{% endblock  %}
