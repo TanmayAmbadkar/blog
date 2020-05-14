@@ -4,7 +4,7 @@ body {
   font-weight: 300;
   font-size: 18px;
   line-height: 1.9;
-  color: #6c757d; }
+  color: #f0f0ff; }
 
 a {
   -webkit-transition: .3s all ease;
@@ -1246,7 +1246,7 @@ blockquote {
   background-position: center center;
   background-repeat: no-repeat;
   padding: 5em 0;
-  background: #000000; }
+  background: #16161D; }
   .site-footer .post-entry-sidebar ul li a h4 {
     color: #fff; }
   .site-footer .footer-social li a > span {

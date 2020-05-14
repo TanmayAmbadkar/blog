@@ -168,3 +168,10 @@ SOCIALACCOUNT_PROVIDERS = {
 
 
 SENDGRID_API_KEY='SG.hb8PP6R1S0CbD_ocQDRHMA.OtoAoK7T-hR0eK49S7m7Hj5dwjFOw6ik57yPp_sUDk'
+
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+]

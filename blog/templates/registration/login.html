@@ -1,15 +1,11 @@
 {% extends 'blog/base.html' %}
 
 
-{% load socialaccount %}
-
-
-
 {% block content %}
 <section class="site-section py-lg">
   <div class="container">
   <h1 class="display-3">Please Login</h1>
-  <h3>Must be superuser, please login <a href="{% provider_login_url 'google' %}">Here</a></h3>
+  <h3>Must be superuser</h3>
 
   {% if form.errors %}
     <p> Your Username and Password did not match. Please Try Again</p>
