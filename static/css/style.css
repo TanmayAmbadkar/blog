@@ -1,5 +1,5 @@
 body {
-  background: #ccc url("../images/photography.png") repeat;
+  background: black;
   font-family: "Inconsolata", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-weight: 300;
   font-size: 18px;
@@ -15,13 +15,13 @@ a {
     text-decoration: none; }
 
 h1, h2, h3, h4, h5 {
-  color: #000;
+   color: #fff;
   font-family: "Josefin Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; }
 
 .wrap {
   max-width: 1250px;
   margin: 0 auto;
-  background: #fff;
+  background: #16161D;
   -webkit-box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.1);
   box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.1); }
 
@@ -32,21 +32,21 @@ header {
   width: 100%;
   z-index: 5;
   font-weight: 400;
-  background: #fff !important; }
+  background: #16161D !important; }
   header .navbar-brand {
     text-transform: uppercase;
     letter-spacing: .2em;
     font-weight: 400;
-    color: #fff !important; }
+    color: #16161D !important; }
   header .navbar-collapse {
     position: relative; }
   header .navbar {
     padding-top: 0;
     padding-bottom: 0;
-    background: transparent !important; }
+    background: #16161D; }
     @media (max-width: 767.98px) {
       header .navbar {
-        background: #e6e6e6 !important; } }
+        background: #16161D; } }
     header .navbar .navbar-nav.absolute-right {
       position: absolute;
       right: 0; }
@@ -89,11 +89,11 @@ header {
           header .navbar .dropdown-menu:before {
             display: none; } }
       header .navbar .dropdown-menu .dropdown-item:hover {
-        background: #6610f2;
-        color: #fff; }
+        background: #16161D;
+        color: #ffffff}
       header .navbar .dropdown-menu .dropdown-item.active {
-        background: #6610f2;
-        color: #fff; }
+        background: #16161D;
+        color: #ffffff; }
       header .navbar .dropdown-menu a {
         padding-top: 7px;
         padding-bottom: 7px; }
@@ -121,7 +121,6 @@ header {
       bottom: -10px; }
 
 .site-logo a {
-  color: #000;
   font-size: 90px; }
   @media (max-width: 991.98px) {
     .site-logo a {
@@ -218,7 +217,7 @@ header {
 
 .bio {
   padding: 15px;
-  background: #fff;
+  background: #16161D !important;
   border: 1px solid #e6e6e6;
   font-weight: 400; }
   .bio img {
@@ -233,7 +232,7 @@ header {
   .bio h2 {
     font-size: 20px; }
   .bio .bio-body .social a {
-    color: #000; }
+    color: #ffffff; }
 
 .site-hero {
   background-size: cover;
@@ -1110,13 +1109,11 @@ textarea.form-control {
     .post-entry-horzontal a .text {
       padding: 30px;
       width: calc(100 - 200px);
-      border: 1px solid #e6e6e6;
       border-left: none; }
       @media (max-width: 767.98px) {
         .post-entry-horzontal a .text {
           width: 100%;
           height: 200px;
-          border: 1px solid #e6e6e6;
           border-top: none; } }
       .post-entry-horzontal a .text h2 {
         font-size: 20px; }
