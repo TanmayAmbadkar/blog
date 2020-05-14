@@ -15,7 +15,7 @@ a {
     text-decoration: none; }
 
 h1, h2, h3, h4, h5 {
-  color: #ffffff;
+   color: #fff;
   font-family: "Josefin Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; }
 
 .wrap {
@@ -1109,13 +1109,11 @@ textarea.form-control {
     .post-entry-horzontal a .text {
       padding: 30px;
       width: calc(100 - 200px);
-      border: 1px solid #e6e6e6;
       border-left: none; }
       @media (max-width: 767.98px) {
         .post-entry-horzontal a .text {
           width: 100%;
           height: 200px;
-          border: 1px solid #e6e6e6;
           border-top: none; } }
       .post-entry-horzontal a .text h2 {
         font-size: 20px; }
@@ -1248,7 +1246,7 @@ blockquote {
   background-position: center center;
   background-repeat: no-repeat;
   padding: 5em 0;
-  background: #262626; }
+  background: #000000; }
   .site-footer .post-entry-sidebar ul li a h4 {
     color: #fff; }
   .site-footer .footer-social li a > span {
