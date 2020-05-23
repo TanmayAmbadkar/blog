@@ -24,9 +24,10 @@
 
             {% if post.published_date  %}
 
-                <span class="mr-2">{{ post.published_date|date:"D M Y"}}</span> &bullet;
+                <span class="mr-2">{{ post.published_date|date:"Y-m-d"}}</span> &bullet;
 
                 <span class="ml-2"><span class="fa fa-comments"></span> {{post.approve_comments.count}}</span>
+		<span class="ml-2"><span class="fa fa-thumbs-o-up"></span> {{post.get_total_likes}}</span>
             {% else %}
                 <a href="{% url 'post_publish' pk=post.pk %}" class='btn btn-primary'>Publish</a>
             {% endif %}
