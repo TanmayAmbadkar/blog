@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView, View
 from blog.models import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.base import TemplateResponseMixin
@@ -186,3 +186,46 @@ def signup_view(request):
         form_class = UserForm()
 
     return render(request, 'registration/signup.html', {'form': form_class})
+
+
+class UpdatePostVote(LoginRequiredMixin, View):
+    login_url = '/accounts/google/login/'
+    redirect_field_name = 'next'
+
+    def get(self, request, *args, **kwargs):
+
+        post_id = self.kwargs.get('post_id', None)
+        opinion = self.kwargs.get('opinion', None) # like or dislike button clicked
+
+        post = get_object_or_404(Post, id=post_id)
+
+        try:
+            # If child DisLike model doesnot exit then create
+            post.dis_likes
+        except Post.dis_likes.RelatedObjectDoesNotExist as identifier:
+            DisLike.objects.create(post = post)
+
+        try:
+            # If child Like model doesnot exit then create
+            post.likes
+        except Post.likes.RelatedObjectDoesNotExist as identifier:
+            Like.objects.create(post = post)
+
+        if opinion.lower() == 'like':
+
+            if request.user in post.likes.users.all():
+                post.likes.users.remove(request.user)
+            else:
+                post.likes.users.add(request.user)
+                post.dis_likes.users.remove(request.user)
+
+        elif opinion.lower() == 'dis_like':
+
+            if request.user in post.dis_likes.users.all():
+                post.dis_likes.users.remove(request.user)
+            else:
+                post.dis_likes.users.add(request.user)
+                post.likes.users.remove(request.user)
+        else:
+            return redirect('post_detail', pk = post.pk)
+        return redirect('post_detail', pk = post.pk)

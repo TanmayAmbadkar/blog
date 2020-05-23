@@ -20,6 +20,7 @@ urlpatterns = [
     path('post/<int:pk>/publish/', post_publish, name = 'post_publish'),
     path('about/tanmay', TanmayView.as_view(), name = 'tanmay'),
     path('about/aniket', AniketView.as_view(), name = 'aniket'),
+    path('comment/<int:post_id>/<str:opinion>', UpdatePostVote.as_view(), name='requirement_post_vote'),
     path('accounts/', include('allauth.urls')),
 
 ]

@@ -57,6 +57,34 @@
             {{post.text|safe|linebreaksbr}}
         </div>
 
+        <div class="text-left">
+         <span class="pointer">
+            {% if request.user in post.likes.users.all%}
+            <!-- already liked-->
+            <a href={% url 'requirement_post_vote' post_id=post.pk opinion='like' %}>
+            <span class="fa fa-thumbs-o-up">{{post.get_total_likes}}</span>
+            </a>
+            {% else %}
+            <!--not liked-->
+            <a href={% url 'requirement_post_vote' post_id=post.pk opinion='like' %}>
+            <span class="fa fa-thumbs-o-up">{% if post.get_total_likes  %}{{post.get_total_likes}} {% else %} 0
+            {% endif %}</span>
+            </a>
+            {% endif %}
+         </span>
+         <span class="ml-3 pointer">
+         {% if request.user in post.dis_likes.users.all %}
+         <a href={% url 'requirement_post_vote' post_id=post.pk opinion='dis_like' %}>
+         <span class="fa fa-thumbs-o-down">{{post.get_total_dis_likes}}</span>
+         </a>
+         {% else %}
+         <a href={% url 'requirement_post_vote' post_id=post.pk opinion='dis_like' %}>
+         <span class="fa fa-thumbs-o-down">{% if  post.get_total_dis_likes %}{{post.get_total_dis_likes}}
+         {% else %} 0 {% endif %}</span>
+         </a>
+         {% endif %}
+         </span>
+      </div>
 
         <div class="pt-5">
           <h3 class="mb-5">{{post.approve_comments.count}} Comments</h3>
