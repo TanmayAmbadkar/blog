@@ -11,3 +11,5 @@ class PostAdmin(SummernoteModelAdmin):
 admin.site.register(UserProfileInfo)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Comment)
+admin.site.register(Like)
+admin.site.register(DisLike)
