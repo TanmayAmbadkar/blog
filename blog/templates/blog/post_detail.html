@@ -27,7 +27,7 @@
                 <span class="mr-2">{{ post.published_date|date:"Y-m-d"}}</span> &bullet;
 
                 <span class="ml-2"><span class="fa fa-comments"></span> {{post.approve_comments.count}}</span>
-		<span class="ml-2"><span class="fa fa-thumbs-o-up"></span> {{post.get_total_likes}}</span>
+		<span class="ml-2"><span class="fa fa-thumbs-up"></span> {{post.get_total_likes}}</span>
             {% else %}
                 <a href="{% url 'post_publish' pk=post.pk %}" class='btn btn-primary'>Publish</a>
             {% endif %}
@@ -63,7 +63,7 @@
             {% if request.user in post.likes.users.all%}
             <!-- already liked-->
             <a href={% url 'requirement_post_vote' post_id=post.pk opinion='like' %}>
-            <span class="fa fa-thumbs-o-up">{{post.get_total_likes}}</span>
+            <span class="fa fa-thumbs-up">{{post.get_total_likes}}</span>
             </a>
             {% else %}
             <!--not liked-->
@@ -76,7 +76,7 @@
          <span class="ml-3 pointer">
          {% if request.user in post.dis_likes.users.all %}
          <a href={% url 'requirement_post_vote' post_id=post.pk opinion='dis_like' %}>
-         <span class="fa fa-thumbs-o-down">{{post.get_total_dis_likes}}</span>
+         <span class="fa fa-thumbs-down">{{post.get_total_dis_likes}}</span>
          </a>
          {% else %}
          <a href={% url 'requirement_post_vote' post_id=post.pk opinion='dis_like' %}>
@@ -185,7 +185,7 @@
             <h4>{{pos.title}}</h4>
             <div class="post-meta">
               <span class="mr-2">{{ pos.published_date|date:"D M Y"}} </span> &bullet;
-              <span class="ml-2"><span class="fa fa-comments"></span>{{pos.approve_comments.count}}</span>
+              <span class="ml-2"><span class="fa fa-thumbs-up"></span>{{pos.get_total_likes}}</span>
             </div>
           </div>
         </a>

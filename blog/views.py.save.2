@@ -172,7 +172,6 @@ def post_publish(request, pk):
     post.publish()
     return redirect('post_detail', pk = post.pk)
 
-'''
 def signup_view(request):
     form_class = UserForm
     if request.method == 'POST':
@@ -186,8 +185,7 @@ def signup_view(request):
     else:
         form_class = UserForm()
 
-    return render(request, 'registration/signup.html', {'form': form_class})
-'''
+    return re
 
 class UpdatePostVote(LoginRequiredMixin, View):
     login_url = '/accounts/google/login/'
