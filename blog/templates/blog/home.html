@@ -16,7 +16,7 @@
                     <div class="text half-to-full">
                       <div class="post-meta">
 
-                        <span class="author mr-2"><img src="/media/{{post.author.profile_img}}"loading="lazy" alt="Colorlib"> {{post.author.user.first_name}} {{post.author.user.last_name}}</span>&bullet;
+                        <span class="author mr-2"><img src="/media/{{post.author.profile_img}}" loading="lazy" alt="Colorlib"> {{post.author.user.first_name}} {{post.author.user.last_name}}</span>&bullet;
                         <span class="mr-2">{{ post.published_date|date:"Y-m-d"}} </span> &bullet;
 			<span class="ml-2"><span class="fa fa-thumbs-o-up"></span>  {{post.get_total_likes}}</span> &bullet;
                         <span class="ml-2"><span class="fa fa-comments"></span>  {{post.approve_comments.count}}</span>
@@ -108,7 +108,7 @@ class="adsbygoogle"
     <ul>
       <li>
         <a href="{% url 'post_detail' pk=post.pk %}">
-          <img src="/media/{{post.cover_img}}" alt="Image placeholder" class="mr-4">
+          <img src="/media/{{post.cover_img}}" alt="Image placeholder" class="mr-4" loading="lazy">
           <div class="text">
             <h4>{{post.title}}</h4>
             <div class="post-meta">

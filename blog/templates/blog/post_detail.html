@@ -62,12 +62,12 @@
          <span class="pointer">
             {% if request.user in post.likes.users.all%}
             <!-- already liked-->
-            <a href={% url 'requirement_post_vote' post_id=post.pk opinion='like' %}>
+            <a href={% url 'requirement_post_vote' post_id=post.pk opinion='like' %}>Like 
             <span class="fa fa-thumbs-up">{{post.get_total_likes}}</span>
             </a>
             {% else %}
             <!--not liked-->
-            <a href={% url 'requirement_post_vote' post_id=post.pk opinion='like' %}>
+            <a href={% url 'requirement_post_vote' post_id=post.pk opinion='like' %}>Like
             <span class="fa fa-thumbs-o-up">{% if post.get_total_likes  %}{{post.get_total_likes}} {% else %} 0
             {% endif %}</span>
             </a>
@@ -75,11 +75,11 @@
          </span>
          <span class="ml-3 pointer">
          {% if request.user in post.dis_likes.users.all %}
-         <a href={% url 'requirement_post_vote' post_id=post.pk opinion='dis_like' %}>
-         <span class="fa fa-thumbs-down">{{post.get_total_dis_likes}}</span>
+         <a href={% url 'requirement_post_vote' post_id=post.pk opinion='dis_like' %}>Dislike
+         <span class="fa fa-thumbs-down">{post.get_total_dis_likes}}</span>
          </a>
          {% else %}
-         <a href={% url 'requirement_post_vote' post_id=post.pk opinion='dis_like' %}>
+         <a href={% url 'requirement_post_vote' post_id=post.pk opinion='dis_like' %}>Dislike
          <span class="fa fa-thumbs-o-down">{% if  post.get_total_dis_likes %}{{post.get_total_dis_likes}}
          {% else %} 0 {% endif %}</span>
          </a>

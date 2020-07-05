@@ -38,5 +38,5 @@ class CommentForm(forms.ModelForm):
 
         widgets = {
             'author' : forms.TextInput(attrs = {'class' : 'textinputclass'}),
-            'text' : SummernoteWidget()
+            'text' : forms.TextInput()
         }
