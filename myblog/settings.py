@@ -28,7 +28,7 @@ DEBUG = False
 ALLOWED_HOSTS=['makingcomputerssmart.com','www.makingcomputerssmart.com','15.206.163.33', 'localhost']
 
 # Application definition
-SUMMERNOTE_THEME = 'bs4'
+SUMMERNOTE_THEME = 'bs3'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -177,3 +177,7 @@ PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
 ]
 
+SUMMERNOTE_CONFIG = {
+
+    'iframe': False,
+}
