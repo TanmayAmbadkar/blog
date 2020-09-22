@@ -23,7 +23,7 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'blog/templates/blog')
 SECRET_KEY = 'x%pqo&yw^0%9&%s&sf$+vy)*ndw#hjals)p5@7$18+s)m_hbd9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS=['makingcomputerssmart.com','www.makingcomputerssmart.com','15.206.163.33', 'localhost']
 
@@ -133,7 +133,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')
+#STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')
 STATICFILES_DIRS = [
         os.path.join(BASE_DIR, 'static'),
 
