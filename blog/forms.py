@@ -1,6 +1,7 @@
 from django import forms
 from blog.models import *
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
+from django_summernote.fields import SummernoteTextFormField, SummernoteTextField
 
 
 class UserForm(forms.ModelForm):
