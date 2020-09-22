@@ -1,5 +1,4 @@
 // Inline code
-$pre-colo: #ffffff;
 code {
   font-size: $code-font-size;
   color: $code-color;
@@ -32,7 +31,8 @@ kbd {
 pre {
   display: block;
   font-size: $code-font-size;
-  color: $pre-colo;
+  color: $pre-color;
+
   // Account for some code outputs that place code tags in pre tags
   code {
     font-size: inherit;
