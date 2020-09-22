@@ -1,0 +1,196 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block content %}
+
+{% if post.published_date or request.user.is_superuser %}
+<section class="site-section py-lg">
+  <div class="container">
+
+    <div class="row blog-entries element-animate">
+
+      <div class="col-md-12 col-lg-8 main-content">
+       <h1 class="mb-4">{{post.title|safe|linebreaksbr}}</h1>
+	{% if post.type == 'M' %}
+         <a class="category mb-5" href="{% url 'post_list_ML' %}">Machine Learning</a>
+      {% else %}
+
+        <a class="category mb-5" href="{% url 'post_list_DL' %}">Deep Learning</a>
+      {% endif %}
+
+        <img src="/media/{{post.cover_img}}" alt="Image" class="img-fluid mb-5">
+         <div class="post-meta">
+            <span class="author mr-2"> {{post.author.user.first_name}} {{post.author.user.last_name}}</span>&bullet;
+
+            {% if post.published_date  %}
+
+                <span class="mr-2">{{ post.published_date|date:"Y-m-d"}}</span> &bullet;
+
+                <span class="ml-2"><span class="fa fa-comments"></span> {{post.approve_comments.count}}</span>
+		<span class="ml-2"><span class="fa fa-thumbs-up"></span> {{post.get_total_likes}}</span>
+            {% else %}
+                <a href="{% url 'post_publish' pk=post.pk %}" class='btn btn-primary'>Publish</a>
+            {% endif %}
+          </div>
+        {% if user.is_superuser %}
+            {% if post.type == 'M' %}
+            <a href="{% url 'post_edit_ml' pk=post.pk %}" class="btn btn-primary">
+                Edit
+            </a>
+            <a href="{% url 'post_remove_ml' pk=post.pk %}" class="btn btn-primary">
+                Delete
+            </a>
+            {% else %}
+            <a href="{% url 'post_edit_dl' pk=post.pk %}" class="btn btn-primary">
+                Edit
+            </a>
+            <a href="{% url 'post_remove_dl' pk=post.pk %}" class="btn btn-primary">
+                Delete
+            </a>
+
+            {% endif %}
+
+        {% endif %}
+
+
+
+        <div class="post-content-body">
+            {{post.text|safe|linebreaksbr}}
+        </div>
+
+        <div class="text-left">
+         <span class="pointer">
+            {% if request.user in post.likes.users.all%}
+            <!-- already liked-->
+            <a href={% url 'requirement_post_vote' post_id=post.pk opinion='like' %}>Like 
+            <span class="fa fa-thumbs-up">{{post.get_total_likes}}</span>
+            </a>
+            {% else %}
+            <!--not liked-->
+            <a href={% url 'requirement_post_vote' post_id=post.pk opinion='like' %}>Like
+            <span class="fa fa-thumbs-o-up">{% if post.get_total_likes  %}{{post.get_total_likes}} {% else %} 0
+            {% endif %}</span>
+            </a>
+            {% endif %}
+         </span>
+         <span class="ml-3 pointer">
+         {% if request.user in post.dis_likes.users.all %}
+         <a href={% url 'requirement_post_vote' post_id=post.pk opinion='dis_like' %}>Dislike
+         <span class="fa fa-thumbs-down">{post.get_total_dis_likes}}</span>
+         </a>
+         {% else %}
+         <a href={% url 'requirement_post_vote' post_id=post.pk opinion='dis_like' %}>Dislike
+         <span class="fa fa-thumbs-o-down">{% if  post.get_total_dis_likes %}{{post.get_total_dis_likes}}
+         {% else %} 0 {% endif %}</span>
+         </a>
+         {% endif %}
+         </span>
+      </div>
+
+        <div class="pt-5">
+          <h3 class="mb-5">{{post.approve_comments.count}} Comments</h3>
+          <ul class="comment-list">
+
+              {% for comment in post.comments.all %}
+
+                {% if user.is_superuser or comment.approved_comment %}
+                    <li class="comment">
+                {% if comment.profile_img %}
+                    <div class="vcard">
+                        <img src="/media/{{comment.profile_img}}" alt="Image placeholder">
+                    </div>
+                    {% else %}
+                    <div class="vcard">
+                        <img src="{% static "images/img_7.jpg" %}" alt="Image placeholder">
+                    </div>
+                    {% endif %}
+                      <div class="comment-body">
+                        <h3>{{comment.author}}</h3>
+                        <div class="meta">{{comment.created_date}}</div>
+                        <p>{{comment.text|safe|linebreaks}}</p>
+                      </div>
+                    </li>
+                    {% if not comment.approved_comment %}
+                        <a href="{% url 'comment_remove' pk=comment.pk %}">
+                            remove
+                        </a>
+                        <a href="{% url 'comment_approve' pk=comment.pk %}">
+                            approve
+                        </a>
+                    {% endif %}
+
+                {% endif %}
+
+                {% empty %}
+                <p> No Comments!</p>
+
+              {% endfor %}
+
+          </ul>
+          <!-- END comment-list -->
+
+        </div>
+
+        <a class="btn btn-primary btn-comment" href="{% url 'add_comments_to_post' pk=post.pk %}">Add Comment!</a>
+	<p>New comments might not be seen until the author approves them.</br></p>
+  </br>
+
+      </div>
+
+      <!-- END main-content -->
+      <div class="col-md-12 col-lg-4 sidebar">
+        <!-- END sidebar-box -->
+        <div class="sidebar-box">
+          <div class="bio text-center">
+            <img src="/media/{{post.author.profile_img}}" alt="Image Placeholder" class="img-fluid">
+            <div class="bio-body">
+              <h2>{{post.author.user.first_name}} {{post.author.user.last_name}}</h2>
+              <p>{{post.author.description}}</p>
+	      {% if post.author.user.username == 'tanmay'  %}
+                <p><a href="{% url 'tanmay' %}" class="btn btn-primary btn-sm rounded">Read my bio</a></p>
+              {% else %}
+                <p><a href="{% url 'aniket' %}" class="btn btn-primary btn-sm rounded">Read my bio</a></p>
+              {% endif %}
+              <p class="social">
+                <a href="{{post.author.facebook}}" class="p-2"><span class="fa fa-facebook"></span></a>
+                <a href="{{post.author.github}}" class="p-2"><span class="fa fa-github"></span></a>
+                <a href="{{post.author.instagram}}" class="p-2"><span class="fa fa-instagram"></span></a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- END sidebar-box -->
+
+        <!-- END sidebar-box -->
+      </div>
+      <!-- END sidebar -->
+
+    </div>
+  </div>
+</section>
+
+{% endif %}
+
+{% endblock %}
+
+{% block footerblock %}
+    {% for pos in topthree %}
+
+    <ul>
+      <li>
+        <a href="{% url 'post_detail' pk=pos.pk %}">
+          <img src="/media/{{pos.cover_img}}" alt="Image placeholder" class="mr-4">
+          <div class="text">
+            <h4>{{pos.title}}</h4>
+            <div class="post-meta">
+              <span class="mr-2">{{ pos.published_date|date:"D M Y"}} </span> &bullet;
+              <span class="ml-2"><span class="fa fa-thumbs-up"></span>{{pos.get_total_likes}}</span>
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
+
+    {% endfor %}
+
+{% endblock  %}
