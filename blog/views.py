@@ -95,7 +95,7 @@ class CreatePostView(LoginRequiredMixin, CreateView):
 class PostUpdateView_ML(LoginRequiredMixin, UpdateView):
 
     template_name = 'post_form.html'
-    success_url = reverse_lazy('post_list_ML')
+    success_url = reverse_lazy('post_list_DL')
     login_url = '/login/'
     form_class = PostForm
     model = Post
