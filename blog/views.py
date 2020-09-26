@@ -130,7 +130,7 @@ class DraftListView(LoginRequiredMixin, ListView):
 
         return Post.objects.filter(published_date__isnull = True).order_by('created_date')
 
-
+@login_required(login_url='/accounts/google/login/')
 def add_comments_to_post(request, pk):
 
     post = get_object_or_404(Post, pk=pk)
@@ -141,6 +141,8 @@ def add_comments_to_post(request, pk):
         if form_class.is_valid():
             comment = form_class.save(commit = False)
             comment.post = post
+            comment.author = f"{request.user.first_name} {request.user.last_name}"
+            comment.approved_comment = True
             comment.save()
             return redirect('post_detail', pk = post.pk)
 
@@ -172,22 +174,6 @@ def post_publish(request, pk):
     post.publish()
     return redirect('post_detail', pk = post.pk)
 
-'''
-def signup_view(request):
-    form_class = UserForm
-    if request.method == 'POST':
-
-        form_class = UserForm(request.POST)
-
-        if form_class.is_valid():
-            form_class.save()
-            return redirect('home')
-
-    else:
-        form_class = UserForm()
-
-    return render(request, 'registration/signup.html', {'form': form_class})
-'''
 
 class UpdatePostVote(LoginRequiredMixin, View):
     login_url = '/accounts/google/login/'

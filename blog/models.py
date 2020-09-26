@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
 
 # Create your models here.
 
@@ -59,15 +60,27 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+class CommentManager(models.Manager):
+
+    def filter_by_instance(self, instance):
+        content_type = ContentType.objects.get_for_model(instance.__class__)
+        obj_id = instance.id
+        qs = super(CommentManager, self).filter(content_type=content_type, object_id=obj_id)
+        return qs
 
 class Comment(models.Model):
 
+
+    parent = models.ForeignKey('self', null=True, blank=True, related_name='replies', on_delete=models.CASCADE)
     post = models.ForeignKey('blog.Post', related_name = 'comments', on_delete = models.CASCADE)
     author = models.CharField(max_length = 100)
     profile_img = models.ImageField(upload_to = 'profile_pics', blank = True)
     text= models.TextField()
     create_date = models.DateTimeField(default = timezone.now)
     approved_comment = models.BooleanField(default = False)
+
+    class Meta:
+        ordering = ['create_date']
 
     def approve(self):
         self.approved_comment = True
@@ -81,6 +94,13 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text
+
+    def children(self):
+        return Comment.objects.filter(parent=self)
+    @property
+    def is_parent(self):
+        return self.parent is None
+
 
 class Like(models.Model):
 

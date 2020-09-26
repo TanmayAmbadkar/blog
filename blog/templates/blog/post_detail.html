@@ -58,11 +58,13 @@
             {{post.text|safe|linebreaksbr}}
         </div>
 
+
+        {% if post.published_date %}
         <div class="text-left">
          <span class="pointer">
             {% if request.user in post.likes.users.all%}
             <!-- already liked-->
-            <a href={% url 'requirement_post_vote' post_id=post.pk opinion='like' %}>Like 
+            <a href={% url 'requirement_post_vote' post_id=post.pk opinion='like' %}>Like
             <span class="fa fa-thumbs-up">{{post.get_total_likes}}</span>
             </a>
             {% else %}
@@ -86,7 +88,6 @@
          {% endif %}
          </span>
       </div>
-
         <div class="pt-5">
           <h3 class="mb-5">{{post.approve_comments.count}} Comments</h3>
           <ul class="comment-list">
@@ -135,6 +136,9 @@
         <a class="btn btn-primary btn-comment" href="{% url 'add_comments_to_post' pk=post.pk %}">Add Comment!</a>
 	<p>New comments might not be seen until the author approves them.</br></p>
   </br>
+
+
+  {% endif %}
 
       </div>
 

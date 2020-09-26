@@ -35,10 +35,8 @@ class CommentForm(forms.ModelForm):
 
     class Meta():
         model = Comment
-        fields = ('author', 'text', 'profile_img')
+        fields = ('text', )
 
         widgets = {
-            'author' : forms.TextInput(attrs = {'class' : 'textinputclass'}),
             'text' : forms.Textarea()
-
         }
