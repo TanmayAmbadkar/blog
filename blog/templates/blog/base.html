@@ -1,5 +1,7 @@
 {% load static %}
 {% load socialaccount %}
+{% load pwa %}
+
 <!DOCTYPE html>
 
 
@@ -19,8 +21,9 @@
         <title>Making Computers Smart</title>
 
         <!-- Wordify -->
+        {% progressive_web_app_meta %}
 	<meta name="description" content="This blog is about machine learning and deep learning, by Tanmay and Aniket"/>
-	<meta name="theme-color" content="#6610f2">
+	<!-- meta name="theme-color" content="#6610f2" -->
         <!-- Schema.org markup for Google+ -->
         <meta itemprop="name" content="Making Computers Smart">
         <meta itemprop="description" content="This blog is about machine learning and deep learning, by Tanmay and Aniket">
@@ -36,8 +39,8 @@
         <meta name="twitter:image:src" content="{% static 'images/mainimage.jpg' %}">
 
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
-        <link rel="manifest" href="{% static "manifest.json" %} ">
-	 <link rel="apple-touch-icon" href="{% static 'images/icon-192x192.png' %}">
+        <!-- link rel="manifest" href="{% static "manifest.json" %} " -->
+	 <!-- link rel="apple-touch-icon" href="{% static 'images/icon-192x192.png' %}" -->
 
         <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300, 400,700|Inconsolata:400,700&display=swap" rel="stylesheet">
 

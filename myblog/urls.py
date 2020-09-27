@@ -28,4 +28,5 @@ urlpatterns = [
     path('login/', views.LoginView.as_view(), name = 'login'),
     path('accounts/logout/', views.LogoutView.as_view(), name = 'logout', kwargs = {'next_page':'home'}),
     path('accounts/', include('allauth.urls')),
+    path('', include('pwa.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
