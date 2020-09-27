@@ -192,7 +192,7 @@ PWA_APP_BACKGROUND_COLOR = '#ffffff'
 PWA_APP_DISPLAY = 'standalone'
 PWA_APP_SCOPE = '/'
 PWA_APP_ORIENTATION = 'portrait'
-PWA_APP_START_URL = 'https://www.makingcomputerssmart.com/'
+PWA_APP_START_URL = 'http://localhost:8000/'
 PWA_APP_STATUS_BAR_COLOR = '#6610f2'
 PWA_APP_ICONS = [
     {
