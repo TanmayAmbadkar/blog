@@ -3,8 +3,8 @@
     "background_color": "#ffffff",
     "display": "standalone",
     "scope": "/",
-    "start_url": "https://wwww.makingcomputerssmart.com",
-    "app_name": "Making Computers Smart",
+    "start_url": "https://www.makingcomputerssmart.com/",
+    "name": "Making Computers Smart",
     "short_name": "MCS",
     "icons": [
         {
