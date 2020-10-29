@@ -1,6 +1,10 @@
 {% extends "blog/base.html" %}
 {% load static %}
 
+{% block meta_desc %}
+	<meta name="description" content = {{post.meta_tag}}>
+{% endblock %}
+
 {% block content %}
 
 {% if post.published_date or request.user.is_superuser %}

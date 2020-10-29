@@ -20,12 +20,13 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'blog/templates/blog')
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'x%pqo&yw^0%9&%s&sf$+vy)*ndw#hjals)p5@7$18+s)m_hbd9'
+#SECRET_KEY = os.environ.get('SECRETKEY')
+SECRET_KEY = '!e^ekq6@t^b@i^u-fu9xw9cdqz&lrz=6p&aw2aguue1-!930bu'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS=['makingcomputerssmart.com','www.makingcomputerssmart.com','15.206.163.33', 'localhost']
+ALLOWED_HOSTS=['makingcomputerssmart.com','www.makingcomputerssmart.com','13.127.61.28', 'localhost']
 
 # Application definition
 SUMMERNOTE_THEME = 'bs3'
@@ -192,7 +193,7 @@ PWA_APP_BACKGROUND_COLOR = '#ffffff'
 PWA_APP_DISPLAY = 'standalone'
 PWA_APP_SCOPE = '/'
 PWA_APP_ORIENTATION = 'portrait'
-PWA_APP_START_URL = 'http://localhost:8000/'
+PWA_APP_START_URL = 'https://www.makingcomputerssmart.com/'
 PWA_APP_STATUS_BAR_COLOR = '#6610f2'
 PWA_APP_ICONS = [
     {
@@ -230,3 +231,5 @@ PWA_APP_ICONS_APPLE = [
 #]
 #PWA_APP_DIR = 'ltr'
 PWA_APP_LANG = 'en-US'
+
+#PWA_SERVICE_WORKER_PATH = os.path.join(TEMPLATE_DIR, 'serviceworker.js')

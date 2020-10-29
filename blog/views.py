@@ -8,8 +8,16 @@ from django.contrib.auth.decorators import login_required
 from blog.forms import *
 from django.urls import reverse_lazy
 from django.contrib.auth import login, authenticate
+from django.core import serializers
+from django.http import HttpResponse
 # Create your views here.
 
+
+def getdata(request):
+
+    results = Post.objects.all()
+    jsondata = serializers.serialize('json', results)
+    return HttpResponse(jsondata)
 
 class TanmayView(TemplateView):
 

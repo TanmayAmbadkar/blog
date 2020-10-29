@@ -9,8 +9,8 @@
 
 <html lang="en" dir="ltr">
     <head>
-	<script src="https://www.googletagmanager.com/gtag/js?id=UA-165442886-1" defer></script>
-	<script defer>
+	<script src="https://www.googletagmanager.com/gtag/js?id=UA-165442886-1" async></script>
+	<script async>
 	 window.dataLayer = window.dataLayer || [];
 	 function gtag(){dataLayer.push(arguments);}
 	 gtag('js', new Date());
@@ -19,14 +19,16 @@
 	<meta name="google-site-verification" content="hplrCBoqgfFpEpCUJ4mI1nvS7kvZxd3MZgGnk1qyjos" />
   	<meta charset="utf-8">
         <title>Making Computers Smart</title>
-
+	{% progressive_web_app_meta %}
         <!-- Wordify -->
-        {% progressive_web_app_meta %}
-	<meta name="description" content="This blog is about machine learning and deep learning, by Tanmay and Aniket"/>
+        
+	
+	<!-- meta name="description" content="This blog is about machine learning and deep learning, by Tanmay and Aniket"/ -->
 	<!-- meta name="theme-color" content="#6610f2" -->
         <!-- Schema.org markup for Google+ -->
         <meta itemprop="name" content="Making Computers Smart">
-        <meta itemprop="description" content="This blog is about machine learning and deep learning, by Tanmay and Aniket">
+	{% block meta_desc %}
+	{% endblock %}
         <meta itemprop="image" content="{% static 'images/mainimage.jpg' %}">
 
         <!-- Twitter Card data -->
@@ -45,14 +47,17 @@
         <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300, 400,700|Inconsolata:400,700&display=swap" rel="stylesheet">
 
         <link rel="stylesheet" href="{% static 'css/animate.css' %}"-->
+	
         <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/owlscroll.css' %}">
 
         <link rel="stylesheet" href="{% static 'fonts/fontawesome/css/font-awesome.min.css' %}">
 
         <!-- Theme Style -->
         <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" >
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
+	<!--script type="text/javascript" src="{% static 'js/idb.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/idbop.js' %}"></script-->
     </head>
     <body>
 

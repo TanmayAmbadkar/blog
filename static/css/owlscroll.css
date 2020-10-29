@@ -1,0 +1,7 @@
+.owl-carousel.owl-drag .owl-item{
+
+    -ms-touch-action: auto;
+
+        touch-action: auto;
+
+}

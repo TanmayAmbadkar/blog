@@ -38,6 +38,7 @@ class Post(models.Model):
     created_date = models.DateTimeField(default = timezone.now)
     published_date = models.DateTimeField(blank = True, null = True)
     type = models.CharField(max_length = 1, choices = types, blank = True)
+    meta_tag = models.CharField(max_length = 160, blank = True)
 
 
     def publish(self):
