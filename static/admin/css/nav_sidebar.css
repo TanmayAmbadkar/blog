@@ -34,6 +34,7 @@
     z-index: 15;
     flex: 0 0 275px;
     left: -276px;
+    display: none;
     margin-left: -276px;
     border-top: 1px solid transparent;
     border-right: 1px solid #eaeaea;
