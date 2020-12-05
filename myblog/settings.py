@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,12 +22,12 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'blog/templates/blog')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 #SECRET_KEY = os.environ.get('SECRETKEY')
-SECRET_KEY = '!e^ekq6@t^b@i^u-fu9xw9cdqz&lrz=6p&aw2aguue1-!930bu'
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True if config('DEBUG') == "True" else False
 
-ALLOWED_HOSTS=['makingcomputerssmart.com','www.makingcomputerssmart.com','13.127.61.28', 'localhost']
+ALLOWED_HOSTS=['makingcomputerssmart.com','www.makingcomputerssmart.com','13.127.61.28', 'localhost', '127.0.0.1']
 
 # Application definition
 SUMMERNOTE_THEME = 'bs3'
@@ -193,7 +194,10 @@ PWA_APP_BACKGROUND_COLOR = '#ffffff'
 PWA_APP_DISPLAY = 'standalone'
 PWA_APP_SCOPE = '/'
 PWA_APP_ORIENTATION = 'portrait'
-PWA_APP_START_URL = 'https://www.makingcomputerssmart.com/'
+if DEBUG:
+    PWA_APP_START_URL = 'http://localhost:8000/'
+else:
+    PWA_APP_START_URL = 'https://www.makingcomputerssmart.com/'
 PWA_APP_STATUS_BAR_COLOR = '#6610f2'
 PWA_APP_ICONS = [
     {

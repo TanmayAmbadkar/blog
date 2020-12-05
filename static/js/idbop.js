@@ -1,4 +1,4 @@
-fetch('https://www.makingcomputerssmart.com/getdata').then(function(response){
+fetch('http://localhost:8000/get_posts').then(function(response){
 
   return response.json();
 
@@ -17,7 +17,7 @@ var dbPromise = idb.open('posts-db', 1, function(upgradeDb) {
 
 
 
-fetch('https://www.makingcomputerssmart.com/getdata').then(function(response){
+fetch('http://localhost:8000/get_posts').then(function(response){
 
   return response.json();
 
@@ -32,7 +32,7 @@ fetch('https://www.makingcomputerssmart.com/getdata').then(function(response){
 
       if (jsondata.hasOwnProperty(key)) {
 
-        feedsStore.put(jsondata[key]); 
+        feedsStore.put(jsondata[key]);
 
       }
 
