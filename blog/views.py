@@ -13,11 +13,16 @@ from django.http import HttpResponse
 # Create your views here.
 
 
-def getdata(request):
+def get_posts(request):
 
     results = Post.objects.all()
     jsondata = serializers.serialize('json', results)
     return HttpResponse(jsondata)
+
+def base_layout(request):
+    
+	template='blog/base.html'
+	return render(request,template)
 
 class TanmayView(TemplateView):
 

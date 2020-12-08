@@ -22,7 +22,8 @@ urlpatterns = [
     path('about/aniket', AniketView.as_view(), name = 'aniket'),
     path('comment/<int:post_id>/<str:opinion>', UpdatePostVote.as_view(), name='requirement_post_vote'),
     path('accounts/', include('allauth.urls')),
-    path('getdata', getdata, name='getdata'),
+    path('get_posts', get_posts, name='get_posts'),
+    path('base_layout', base_layout, name='base_layout'),
 
 
 ]

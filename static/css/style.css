@@ -181,7 +181,7 @@ header {
     position: absolute;
     content: "";
     z-index: 1;
-    opacity: .3;
+    opacity: .8;
     -webkit-transition: .3s all ease;
     -o-transition: .3s all ease;
     transition: .3s all ease;
@@ -214,7 +214,7 @@ header {
     .a-block .text p {
       color: #fff; }
   .a-block:hover:before {
-    opacity: .4; }
+    opacity: .6; }
 
 .bio {
   padding: 15px;
